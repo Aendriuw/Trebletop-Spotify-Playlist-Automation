@@ -1,7 +1,11 @@
+# Milosoiu Andrei
+# Email: andrei18.milosoiu@gmail.com
+
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
+import sys
 
 load_dotenv()
 
@@ -68,15 +72,21 @@ def update_playlist(sp, playlist_id, track_uris):
 		raise
 
 def main():
+	if len(sys.argv) != 2:
+		print("Expected input: spotify-script.py <number_of_songs>")
+		sys.exit(1)
+
+	# Command line argument that indicates how many songs will be added to the playlist.
+	limit = int(sys.argv[1])
+
 	sp = get_spotify_client()
 
 	playlist_id = os.getenv('SPOTIPY_PLAYLIST_ID')
 	if not playlist_id:
 		raise ValueError("SPOTIPY_PLAYLIST_ID is not set in your .env file.")
 
-	top_uris = fetch_top_tracks(sp, time_range='short_term', limit=100)
+	top_uris = fetch_top_tracks(sp, time_range='short_term', limit=limit)
 	update_playlist(sp, playlist_id, top_uris)
-
 
 if __name__ == "__main__":
 	main()
