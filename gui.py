@@ -7,6 +7,7 @@ import select
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
+import tkinter.messagebox
 
 # Functions
 def click_update_button():
@@ -18,8 +19,11 @@ def click_update_button():
 		cmd_term = "medium_term"
 	elif aux_term == "All time":
 		cmd_term = "long_term"
-
-	subprocess.call(['python3', cmd_script, cmd_song_cnt, cmd_term])
+	try:
+		subprocess.call(['python3', cmd_script, cmd_song_cnt, cmd_term])
+		tkinter.messagebox.showinfo("Information",  "Your playlist has been modified succesfully.")
+	except:
+		tkinter.messagebox.showerror("Error",  "An error occured. Check README for possible issues.")
 
 def display(x):
 	selection = x
@@ -71,7 +75,8 @@ song_cnt.pack(
 # 1. Combobox Label
 label = ttk.Label(
 	root,
-	text="Time interval:")
+	text="Time interval:"
+)
 label.pack()
 
 # 2. Combobox Body
