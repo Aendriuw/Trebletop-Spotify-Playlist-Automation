@@ -45,8 +45,6 @@ On the first run, a browser window will open asking to authorise the app with yo
 
 ## Resources used
 
-## Technologies Used
-
 ### Spotipy & the Spotify Web API
 
 **Spotipy** is a Python wrapper around the **Spotify Web API**. TrebleTop uses it to:
