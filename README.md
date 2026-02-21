@@ -42,3 +42,18 @@ bash:
 `python3 gui.py`
 
 On the first run, a browser window will open asking to authorise the app with your Spotify account. After authorising, a `.spotify_cache` file will be created locally to store your session so you won't need to log in again.
+
+## Resources used
+
+## Technologies Used
+
+### Spotipy & the Spotify Web API
+
+**Spotipy** is a Python wrapper around the **Spotify Web API**. TrebleTop uses it to:
+- Authenticate with your Spotify account via **OAuth 2.0** (handled by `SpotifyOAuth`)
+- Read your **top tracks** using the `current_user_top_tracks` endpoint
+- Modify a playlist using the `playlist_replace_items` endpoint
+
+### Azure ttk Theme
+
+The UI uses the **Azure ttk theme**(https://github.com/rdbende/Azure-ttk-theme) by **rdbende**. It is included in this repository under its original MIT license. The dark variant is used.
