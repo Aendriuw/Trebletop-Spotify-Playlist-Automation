@@ -33,60 +33,52 @@ def get_spotify_client():
 	return sp
 
 # Fetches the current user's top tracks.
-# API max per call is 50 songs uris, so we fetch by chunks of 50.
+# API max per call is 50 songs uris, so the function fetches by chunks of 50.
 def fetch_top_tracks(sp, time_range='short_term', limit=100):
 	track_uris = []
 
 	for offset_val in range(0, limit, 50):
-		try:
-			results = sp.current_user_top_tracks(
-				time_range=time_range,
-				limit=50,
-				offset=offset_val
-			)
-			batch = [track['uri'] for track in results['items']]
-			track_uris.extend(batch)
+		results = sp.current_user_top_tracks(
+			time_range=time_range,
+			limit=50,
+			offset=offset_val
+		)
+		batch = [track['uri'] for track in results['items']]
+		track_uris.extend(batch)
 
-			if len(results['items']) < 50:
-				break
+		if len(results['items']) < 50:
+			break
 
-		except spotipy.exceptions.SpotifyException as e:
-			print(f"Error fetching top tracks.")
-			raise
-
-	print(f"Fetched {len(track_uris)} top tracks.")
+	print(f"Fetched {len(track_uris)} top songs.")
 	return track_uris
 
 # Replaces all items in the playlist with the given track URIs.
 # Playlist_replace_items replaces in chunks of max 100.
-def update_playlist(sp, playlist_id, track_uris):
+def update_playlist(sp, playlist_id, track_uris, time_range):
 	if not track_uris:
-		print("No tracks found. Not updating.")
+		print("No songs found. Not updating.")
 		return
 
-	try:
-		sp.playlist_replace_items(playlist_id, track_uris)
-		print(f"Updated playlist {playlist_id} with {len(track_uris)} tracks.")
-	except spotipy.exceptions.SpotifyException as e:
-		print(f"Error updating playlist.")
-		raise
+	sp.playlist_replace_items(playlist_id, track_uris)
+	print(f"Updated playlist {playlist_id} with {len(track_uris)} songs (time range: {time_range}).")
 
 def main():
-	if len(sys.argv) != 2:
-		print("Expected input: spotify-script.py <number_of_songs>")
+	if len(sys.argv) != 3:
+		print("Expected input: spotify-script.py <number_of_songs> <time_range>")
 		sys.exit(1)
 
-	# Command line argument that indicates how many songs will be added to the playlist.
+	# Command line arguments for songs count and time range.
 	limit = int(sys.argv[1])
+	time_range=sys.argv[2]
 
 	sp = get_spotify_client()
 
 	playlist_id = os.getenv('SPOTIPY_PLAYLIST_ID')
 	if not playlist_id:
-		raise ValueError("SPOTIPY_PLAYLIST_ID is not set in your .env file.")
+		print("SPOTIPY_PLAYLIST_ID is not set in your .env file.")
 
-	top_uris = fetch_top_tracks(sp, time_range='short_term', limit=limit)
-	update_playlist(sp, playlist_id, top_uris)
+	top_uris = fetch_top_tracks(sp, time_range=time_range, limit=limit)
+	update_playlist(sp, playlist_id, top_uris, time_range)
 
 if __name__ == "__main__":
 	main()
