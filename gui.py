@@ -83,9 +83,9 @@ label.pack()
 # 2. Combobox Body
 curr_term = tk.StringVar(value=100)
 term = ttk.Combobox(
-    root,
-    values=["Last month", "Last 6 months", "All time"],
-    state="readonly",
+	root,
+	values=["Last month", "Last 6 months", "All time"],
+	state="readonly",
 	textvariable=curr_term
 )
 term.pack(pady=5)
