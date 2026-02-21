@@ -32,7 +32,7 @@ def get_spotify_client():
 
 	return sp
 
-# Fetches the current user's top tracks.
+# Fetches the current user's top tracks for the selected time period.
 # API max per call is 50 songs uris, so the function fetches by chunks of 50.
 def fetch_top_tracks(sp, time_range='short_term', limit=100):
 	track_uris = []
@@ -53,6 +53,7 @@ def fetch_top_tracks(sp, time_range='short_term', limit=100):
 	return track_uris
 
 # Replaces all items in the playlist with the given track URIs.
+# Initially, all the songs in the playlist are removed.
 # Playlist_replace_items replaces in chunks of max 100.
 def update_playlist(sp, playlist_id, track_uris, time_range):
 	if not track_uris:
