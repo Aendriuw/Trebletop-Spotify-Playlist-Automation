@@ -21,8 +21,6 @@ def click_update_button():
 
 	subprocess.call(['python3', cmd_script, cmd_song_cnt, cmd_term])
 
-	print()
-
 def display(x):
 	selection = x
 
@@ -82,14 +80,13 @@ term = ttk.Combobox(
     root,
     values=["Last month", "Last 6 months", "All time"],
     state="readonly",
-	# command=display(curr_term.get()),
 	textvariable=curr_term
 )
 term.pack(pady=5)
 term.set("Last month")
 term.bind(
 	"<<ComboboxSelected>>",
-	select
+	display
 )
 term.config(
 	justify="center",
