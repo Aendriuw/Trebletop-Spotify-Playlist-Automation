@@ -5,6 +5,8 @@ Here is a screenshot of the user interface:
 
 <img width="973" height="555" alt="GUI_demo" src="https://github.com/user-attachments/assets/8cb6215b-acc0-4085-8a7b-d188ad311da3" />
 
+## Setup
+
 ### 1. Clone the repository
 
 bash:
@@ -33,3 +35,10 @@ https://open.spotify.com/playlist/**<playlist_id>**? ...
 
 Rename the `.env_example` in the root to `.env` and complete the appropriate content.
 Don't share this .env file.
+
+## Run
+
+bash:
+`python3 gui.py`
+
+On the first run, a browser window will open asking to authorise the app with your Spotify account. After authorising, a `.spotify_cache` file will be created locally to store your session so you won't need to log in again.
