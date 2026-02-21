@@ -33,13 +33,13 @@ https://open.spotify.com/playlist/**<playlist_id>**? ...
 
 ### 5. Configure the **.env** file
 
-Rename the `.env_example` in the root to `.env` and complete the appropriate content.
+Rename the `.env_example` in the root to `.env` and complete the appropriate content. The client id and secret key are found on the Spotify for developers website. The **redirect link** should be the **exact same** as the redirect URI used on the Spotify for developers website. The playlist id is the one copied from the link.
 Don't share this .env file.
 
 ## Run
 
 bash:
-`python3 gui.py`
+`python3 trebletop.py`
 
 On the first run, a browser window will open asking to authorise the app with your Spotify account. After authorising, a `.spotify_cache` file will be created locally to store your session so you won't need to log in again.
 
@@ -47,11 +47,11 @@ On the first run, a browser window will open asking to authorise the app with yo
 
 ### Spotipy & the Spotify Web API
 
-**Spotipy** is a Python wrapper around the **Spotify Web API**. TrebleTop uses it to:
-- Authenticate with your Spotify account via **OAuth 2.0** (handled by `SpotifyOAuth`)
+**Spotipy** is a Python wrapper around the **Spotify Web API**. The program uses it to:
+- Authenticate with your Spotify account using `SpotifyOAuth`
 - Read your **top tracks** using the `current_user_top_tracks` endpoint
 - Modify a playlist using the `playlist_replace_items` endpoint
 
 ### Azure ttk Theme
 
-The UI uses the **Azure ttk theme**(https://github.com/rdbende/Azure-ttk-theme) by **rdbende**. It is included in this repository under its original MIT license. The dark variant is used.
+The UI uses the **Azure ttk theme** (https://github.com/rdbende/Azure-ttk-theme) by **rdbende**. It is included in this repository with its original MIT license.
