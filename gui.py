@@ -1,9 +1,7 @@
 # Milosoiu Andrei
 # Email: andrei18.milosoiu@gmail.com
 
-import os
 import subprocess
-import select
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
