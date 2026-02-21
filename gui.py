@@ -24,6 +24,12 @@ def click_update_button():
 def display(x):
 	selection = x
 
+def on_button_toggle():
+    if run_start.get() == 1:
+        print("Checkbutton is selected")
+    else:
+        print("Checkbutton is deselected")
+
 # Main
 root = tk.Tk(
 	screenName=None,
@@ -101,5 +107,20 @@ update_button = ttk.Button(
 	command=click_update_button
 )
 update_button.pack(padx=20, pady=20)
+
+# Checkbutton (startup)
+run_start = tk.IntVar()
+checkbutton = ttk.Checkbutton(
+	root,
+	text="Run on startup with current settings",
+	variable=run_start,
+	onvalue=1,
+	offvalue=0,
+	command=on_button_toggle
+)
+checkbutton.pack(
+	padx=20,
+	pady=20
+)
 
 root.mainloop()
