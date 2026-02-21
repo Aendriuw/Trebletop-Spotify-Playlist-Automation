@@ -1,8 +1,8 @@
-# Spotify-Playlist-App
-<img width="973" height="555" alt="GUI_demo" src="https://github.com/user-attachments/assets/8cb6215b-acc0-4085-8a7b-d188ad311da3" />
+# TrebleTop - Spotify playlist automation app
 
-An app which connects to a spotify account and creates a playlist with a chosen number of the most
-listened songs from a chosen period of time.
+TrebleTop is a small Linux desktop app that automatically updates one of your Spotify playlists with your most listened songs. The number of songs in the playlist and the time range are chosen by the user. Here is a screenshot of the user interface:
+
+<img width="973" height="555" alt="GUI_demo" src="https://github.com/user-attachments/assets/8cb6215b-acc0-4085-8a7b-d188ad311da3" />
 
 
 ## spotify-script.py
