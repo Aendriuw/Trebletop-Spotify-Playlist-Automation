@@ -19,11 +19,14 @@ def click_update_button():
 	elif aux_term == "All time":
 		cmd_term = "long_term"
 
-	try:
-		subprocess.call(['python3', cmd_script, cmd_song_cnt, cmd_term])
-		tkinter.messagebox.showinfo("Information", "Your playlist has been modified successfully.")
-	except:
-		tkinter.messagebox.showerror("Error", "An error occurred. Check README for possible issues.")
+	if int(curr_song_cnt.get()) % 50 != 0:
+		tkinter.messagebox.showerror("Error", "Please enter a multiple of 50.\n( e.g. 50, 100, 150 ... )")
+	else:
+		try:
+			subprocess.call(['python3', cmd_script, cmd_song_cnt, cmd_term])
+			tkinter.messagebox.showinfo("Information", "Your playlist has been modified successfully.")
+		except:
+			tkinter.messagebox.showerror("Error", "An error occurred. Check README for possible issues.")
 
 def display(x):
 	selection = x
