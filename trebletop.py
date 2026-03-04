@@ -8,6 +8,9 @@ from tkinter import ttk
 import tkinter.messagebox
 
 # Functions
+
+# Calls the spotify-script.py script, which updates the given playlist with the
+# appropriate paramters, using the subprocess library.
 def click_update_button():
 	cmd_script = "spotify-script.py"
 	cmd_song_cnt = curr_song_cnt.get()
@@ -28,6 +31,8 @@ def click_update_button():
 		except:
 			tkinter.messagebox.showerror("Error", "An error occurred. Check README for possible issues.")
 
+# Updates the internal state when the user interacts with the Combobox or the
+# Spinbox.
 def display(x):
 	selection = x
 
