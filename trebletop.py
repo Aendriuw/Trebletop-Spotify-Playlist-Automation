@@ -2,6 +2,7 @@
 # Email: andrei18.milosoiu@gmail.com
 
 import subprocess
+import sys
 import tkinter as tk
 from tkinter import *
 from tkinter import ttk
@@ -26,7 +27,7 @@ def click_update_button():
 		tkinter.messagebox.showerror("Error", "Please enter a multiple of 50.\n( e.g. 50, 100, 150 ... )")
 	else:
 		try:
-			subprocess.call(['python3', cmd_script, cmd_song_cnt, cmd_term])
+			subprocess.call([sys.executable, cmd_script, cmd_song_cnt, cmd_term])
 			tkinter.messagebox.showinfo("Information", "Your playlist has been modified successfully.")
 		except:
 			tkinter.messagebox.showerror("Error", "An error occurred. Check README for possible issues.")

@@ -16,7 +16,9 @@ cd trebletop`
 ### 2. Install dependecies
 
 bash:
-`pip install spotipy python-dotenv`
+`make install`
+
+This creates a `venv` folder and installs `spotipy` and `python-dotenv` in it. Tkinter must also be available (on Debian/Ubuntu: `sudo apt install python3-tk`).
 
 ### 3. Create a Spotify for Developers app
 
@@ -39,7 +41,18 @@ Don't share this .env file.
 ## Run
 
 bash:
-`python3 trebletop.py`
+`venv/bin/python trebletop.py`
+
+### Shortcut commands
+
+bash:
+`make shortcut`
+
+This installs two commands in `~/.local/bin` (make sure it is in your `PATH`):
+- `trebletop` opens the GUI from anywhere.
+- `trebletop-update <number_of_songs> <time_period>` updates the playlist from the terminal. The number of songs must be a multiple of 50 and the time period is one of `last_month`, `six_months` or `all_time`. Example: `trebletop-update 100 six_months`
+
+Run `make uninstall` to remove them.
 
 On the first run, a browser window will open asking to authorise the app with your Spotify account. After authorising, a `.spotify_cache` file will be created locally to store your session so you won't need to log in again.
 

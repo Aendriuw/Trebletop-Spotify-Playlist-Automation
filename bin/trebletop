@@ -1,0 +1,4 @@
+#!/bin/bash
+# Launches the TrebleTop GUI from anywhere.
+DIR="$(dirname "$(readlink -f "$0")")/.."
+cd "$DIR" && exec venv/bin/python trebletop.py
