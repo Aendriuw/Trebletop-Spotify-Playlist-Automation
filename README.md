@@ -7,54 +7,72 @@ Here is a screenshot of the user interface:
 
 ## Setup
 
-### 1. Clone the repository
+You need Linux, Python 3, `make` and Tkinter (on Debian/Ubuntu: `sudo apt install python3-venv python3-tk`).
 
-bash:
-`git clone https://github.com/Aendriuw/Trebletop-Spotify-Playlist-Automation
-cd trebletop`
+### 1. Get the code and install
 
-### 2. Install dependecies
+```
+git clone https://github.com/Aendriuw/Trebletop-Spotify-Playlist-Automation
+cd Trebletop-Spotify-Playlist-Automation
+make install
+make shortcut
+```
 
-bash:
-`make install`
+`make install` creates a `venv` folder with the dependencies. `make shortcut` adds the `trebletop` and `trebletop-update` commands to `~/.local/bin`, so make sure that folder is in your `PATH`.
 
-This creates a `venv` folder and installs `spotipy` and `python-dotenv` in it. Tkinter must also be available (on Debian/Ubuntu: `sudo apt install python3-tk`).
+### 2. Create a Spotify app
 
-### 3. Create a Spotify for Developers app
+1. Go to https://developer.spotify.com/dashboard and log in.
+2. Click **Create app**.
+3. Website: `http://localhost:8888`
+4. Redirect URI: `http://127.0.0.1:8888/callback`
+5. Save it and note the **Client ID** and **Client Secret** (under Settings).
 
-1. Go to the Spotify for Developers website (https://developer.spotify.com/) and log in with your Spotify account
-2. Go to the dashboard and click **create app**
-3. For website use: http://localhost:8888
-4. For redirect URIs use: http://127.0.0.1:8888/callback (Most Linux machines have the 127.0.0.1 ip address configured, if you have another ip address configured change the one in the URI with yours)
-5. Save the app and note down your **Client ID** and **Client Secret**.
+### 3. Get your playlist ID
 
-### 4. Copy your playlist's ID
+Open your playlist and copy its link. The ID is between `playlist/` and `?`:
 
-Open your playlist and copy the link to the playlist. The playlist ID  is between the "playlist/" and the "?" character:
-https://open.spotify.com/playlist/**<playlist_id>**? ...
+`https://open.spotify.com/playlist/<playlist_id>?...`
 
-### 5. Configure the **.env** file
+The playlist must be one you own.
 
-Rename the `.env_example` in the root to `.env` and complete the appropriate content. The client id and secret key are found on the Spotify for developers website. The **redirect link** should be the **exact same** as the redirect URI used on the Spotify for developers website. The playlist id is the one copied from the link.
-Don't share this .env file.
+### 4. Fill in the .env file
 
-## Run
+```
+cp .env_example .env
+```
 
-bash:
-`venv/bin/python trebletop.py`
+Open `.env` and fill in your Client ID, Client Secret and playlist ID. Keep the redirect URI the same as in step 2. Never share this file.
 
-### Shortcut commands
+## Usage
 
-bash:
-`make shortcut`
+### GUI
 
-This installs two commands in `~/.local/bin` (make sure it is in your `PATH`):
-- `trebletop` opens the GUI from anywhere.
-- `trebletop-update <number_of_songs> <time_period>` updates the playlist from the terminal. The number of songs must be a multiple of 50 and the time period is one of `last_month`, `six_months` or `all_time`. Example: `trebletop-update 100 six_months`
+```
+trebletop
+```
 
-Run `make uninstall` to remove them.
+Choose the number of songs (a multiple of 50) and the time range, then click update.
 
-On the first run, a browser window will open asking to authorise the app with your Spotify account. After authorising, a `.spotify_cache` file will be created locally to store your session so you won't need to log in again.
+On the first run a browser window opens so you can authorise the app with your Spotify account. After that you stay logged in.
+
+### Terminal
+
+```
+trebletop-update <number_of_songs> <time_period>
+```
+
+The time period is `last_month`, `six_months` or `all_time`. Example:
+
+```
+trebletop-update 100 six_months
+```
+
+### Uninstall the commands
+
+```
+make uninstall
+```
 
 ## Resources used
 
